@@ -10,7 +10,7 @@ pkgname=poke-monitor-git
 # shellcheck disable=SC2034
 pkgdesc="Poke connected DP and HDMI displays after suspend"
 # shellcheck disable=SC2034
-pkgver=r1.a7b073e
+pkgver=r2.4bc9c82
 # shellcheck disable=SC2034
 pkgrel=1
 # shellcheck disable=SC2034
@@ -79,4 +79,5 @@ package() {
   cp "LICENSE" "${pkgdir}/usr/share/licenses/${_gitname}/LICENSE"
   cp "README.md" "${pkgdir}/usr/share/doc/${_gitname}/README.md"
   cp "res/shell/bash/bash_completion" "${pkgdir}/usr/share/bash-completion/completions/${_gitname}"
+  cp "res/systemd/${_gitname}@.service" "${pkgdir}/usr/lib/systemd/system/${_gitname}@.service"
 }

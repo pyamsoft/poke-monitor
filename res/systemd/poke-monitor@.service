@@ -1,14 +1,13 @@
-# Poke the DP monitor on system resume
+# poke-monitor
 [Unit]
-Description=Poke Monitors with xrandr on resume
+Description=Poke connected DP and HDMI displays after suspend
 After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
 
+# We must run as the user that is active in the GUI desktop session. Usually your user (UID 1000)
 [Service]
-# Fail if script does not exist
-ExecStartPre=/bin/test -x /usr/local/bin/poke-monitor
 User=%I
 Group=%I
-ExecStart=/usr/local/bin/poke-monitor auto
+ExecStart=__BIN_DIR__/poke-monitor auto
 
 [Install]
 WantedBy=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
