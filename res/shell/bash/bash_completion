@@ -18,17 +18,12 @@
 _poke_monitor() {
   COMPREPLY=()
   local cur="${COMP_WORDS[COMP_CWORD]}"
-  local prev="${COMP_WORDS[COMP_CWORD - 1]}"
-  local prevprev="${COMP_WORDS[COMP_CWORD - 2]}"
-
   local actions="list auto reset"
 
   # shellcheck disable=SC2207
   COMPREPLY=($(compgen -W "${actions}" -- "${cur}"))
 
   unset cur
-  unset prev
-  unset prevprev
   unset actions
 }
 
