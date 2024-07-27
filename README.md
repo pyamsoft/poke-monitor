@@ -12,7 +12,7 @@ This can be resolved by "poking" the monitor with something like xrandr to
 connected monitors found by xrandr and "pokes" them by calling `--auto`
 to see if a monitor will "wake up" after the system is resumed.
 
-This is particularly on a system connected over SSH without an exported
+This is particularly useful on a system connected over SSH without an exported
 xorg environment, as `poke-monitor` will first attempt to locate the active
 Xauthority file on the system (searching standard locations).
 
