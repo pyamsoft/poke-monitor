@@ -5,6 +5,8 @@
 #
 # https://wiki.archlinux.org/title/Xrandr_
 
+readonly VERSION="0.0.1"
+
 _setup() {
   _uid="$(id -u)"
   if [ "${_uid}" -eq 0 ]; then
