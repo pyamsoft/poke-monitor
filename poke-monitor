@@ -19,14 +19,14 @@ _setup() {
     # Gnome on Xwayland
     for f in /run/user/"${_uid}"/.mutter-Xwaylandauth*; do
       case "$f" in
-        /run/user/"${_uid}"/.mutter-Xwaylandauth\*)
-          # Did not exist
-          ;;
-        /run/user/"${_uid}"/.mutter-Xwaylandauth*)
-          # Found one
-          XAUTHORITY="$f"
-          printf -- 'Use /run/user/%s/.mutter-Xwaylandauth Xauthority %s\n' "${_uid}" "${XAUTHORITY}"
-          ;;
+      /run/user/"${_uid}"/.mutter-Xwaylandauth\*)
+        # Did not exist
+        ;;
+      /run/user/"${_uid}"/.mutter-Xwaylandauth*)
+        # Found one
+        XAUTHORITY="$f"
+        printf -- 'Use /run/user/%s/.mutter-Xwaylandauth Xauthority %s\n' "${_uid}" "${XAUTHORITY}"
+        ;;
       esac
     done
   fi
@@ -43,14 +43,14 @@ _setup() {
   if [ -z "${XAUTHORITY}" ]; then
     for f in /tmp/xauth_*; do
       case "$f" in
-        /tmp/xauth_\*)
-          # Did not exist
-          ;;
-        /tmp/xauth_*)
-          # Found one
-          XAUTHORITY="$f"
-          printf -- 'Use /tmp Xauthority %s\n' "${XAUTHORITY}"
-          ;;
+      /tmp/xauth_\*)
+        # Did not exist
+        ;;
+      /tmp/xauth_*)
+        # Found one
+        XAUTHORITY="$f"
+        printf -- 'Use /tmp Xauthority %s\n' "${XAUTHORITY}"
+        ;;
       esac
     done
   fi
@@ -96,45 +96,45 @@ _xrandr_monitor() {
   fi
 
   case "$1" in
-    list)
-      xrandr || {
-        printf -- 'Failed xrandr list\n'
-        return 1
+  list)
+    xrandr || {
+      printf -- 'Failed xrandr list\n'
+      return 1
+    }
+    return 0
+    ;;
+  auto)
+    _failed=0
+    for _m in ${_monitors}; do
+      printf -- 'Attempt "auto" poke monitor: %s %s\n' "${_m}" "${DISPLAY}"
+      xrandr --output "${_m}" --auto >/dev/null 2>&1 || {
+        printf -- 'Failed to "auto" poke monitor with xrandr: %s\n' "${_m}"
+        _failed=1
       }
-      return 0
-      ;;
-    auto)
-      _failed=0
-      for _m in ${_monitors}; do
-        printf -- 'Attempt "auto" poke monitor: %s %s\n' "${_m}" "${DISPLAY}"
-        xrandr --output "${_m}" --auto >/dev/null 2>&1 || {
-          printf -- 'Failed to "auto" poke monitor with xrandr: %s\n' "${_m}"
-          _failed=1
-        }
-        unset _m
-      done
+      unset _m
+    done
 
-      unset _monitors
-      return "${_failed}"
-      ;;
-    reset)
-      _failed=0
-      for _m in ${_monitors}; do
-        printf -- 'Attempt "reset" poke monitor: %s %s\n' "${_m}" "${DISPLAY}"
-        xrandr --output "${_m}" --off >/dev/null 2>&1 || {
-          printf -- 'Failed to "reset"[off] poke monitor with xrandr: %s\n' "${_m}"
-          _failed=1
-        }
-        xrandr --output "${_m}" --auto >/dev/null 2>&1 || {
-          printf -- 'Failed to "reset"[auto] poke monitor with xrandr: %s\n' "${_m}"
-          _failed=1
-        }
-        unset _m
-      done
+    unset _monitors
+    return "${_failed}"
+    ;;
+  reset)
+    _failed=0
+    for _m in ${_monitors}; do
+      printf -- 'Attempt "reset" poke monitor: %s %s\n' "${_m}" "${DISPLAY}"
+      xrandr --output "${_m}" --off >/dev/null 2>&1 || {
+        printf -- 'Failed to "reset"[off] poke monitor with xrandr: %s\n' "${_m}"
+        _failed=1
+      }
+      xrandr --output "${_m}" --auto >/dev/null 2>&1 || {
+        printf -- 'Failed to "reset"[auto] poke monitor with xrandr: %s\n' "${_m}"
+        _failed=1
+      }
+      unset _m
+    done
 
-      unset _monitors
-      return "${_failed}"
-      ;;
+    unset _monitors
+    return "${_failed}"
+    ;;
   esac
 }
 
@@ -195,12 +195,11 @@ main() {
   fi
 
   case "$1" in
-    auto|reset|list)
-      ;;
-    *)
-      printf -- 'Failed to poke-monitor. Command must be one of "auto" "reset" "list"\n'
-      return 1
-      ;;
+  auto | reset | list) ;;
+  *)
+    printf -- 'Failed to poke-monitor. Command must be one of "auto" "reset" "list"\n'
+    return 1
+    ;;
   esac
 
   # Try poking common monitor DISPLAY connections
