@@ -36,7 +36,6 @@ each connected monitor, before "resetting" it with `xrandr --auto`.
 This can be useful in multi-monitor environments which are
 remotely connected over something like RDP, VNC, or Sunshine.
 
-
 ## Issues
 
 Check the issues page on GitHub for any notes about outstanding or existing
@@ -49,7 +48,7 @@ issue ticket.
 GPLv2
 
 ```
-  Copyright (C) 2024  pyamsoft
+  Copyright (C) 2025 pyamsoft
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
